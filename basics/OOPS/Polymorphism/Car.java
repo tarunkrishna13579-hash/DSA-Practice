@@ -1,0 +1,9 @@
+package OOPS.Polymorphism;
+
+public class Car extends Vehicle{
+	@Override
+	void go() {
+		System.out.println("car is moving");
+	}
+
+}
