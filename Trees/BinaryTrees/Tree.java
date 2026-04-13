@@ -15,6 +15,15 @@ class TreeNode{
 		this.val=val;
 	}
 }
+class pair{
+	TreeNode node;
+	int state;
+	
+	pair(TreeNode node, int state){
+		this.node=node;
+		this.state=state;
+	}
+}
 
 class Trees{
 	public void InOrderTraversal(TreeNode node) {
@@ -65,6 +74,42 @@ class Trees{
 			ls.add(sublist);
 			System.out.println(ls);
 		}
+	}
+	
+	public void preInPostTraversals(TreeNode node) {
+		Stack<pair>st=new Stack<>();
+		List<Integer>pre=new ArrayList<>();
+		List<Integer>in=new ArrayList<>();
+		List<Integer>post=new ArrayList<>();
+		
+		st.push(new pair(node,1));
+		
+		while(!st.isEmpty()) {
+			pair p=st.pop();
+			
+			if(p.state==1) {
+				pre.add(p.node.val);
+				p.state++;
+				st.push(p);
+				if(p.node.left!=null) {
+					st.push(new pair(p.node.left,1));
+				}
+			}
+			else if(p.state==2) {
+				in.add(p.node.val);
+				p.state++;
+				st.push(p);
+				if(p.node.right!=null) {
+					st.push(new pair(p.node.right,1));
+				}
+			}
+			else {
+				post.add(p.node.val);
+			}
+		}
+		System.out.println("Preorder: " + pre);
+        System.out.println("Inorder: " + in);
+        System.out.println("Postorder: " + post);
 	}
 }
 public class Tree {
